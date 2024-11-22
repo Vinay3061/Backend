@@ -32,7 +32,9 @@ const PORT = 3000;
 const allowedOrigins = [
   'http://localhost:3001',
   'http://localhost:3000', // Frontend during development
-  'https://frontend-8awn.onrender.com', // Deployed frontend
+  'https://frontend-8awn.onrender.com', 
+  'https://frontend1-rqrt.onrender.com'
+  // Deployed frontend
 ];
 
 // Configure CORS middleware
