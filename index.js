@@ -28,16 +28,38 @@ const cors = require('cors'); // Import CORS
 const app = express();
 const PORT = 3000;
 
-// Enable CORS for all routes
-app.use(cors());
-app.use(cors({ origin: 'https://backend-dpot.onrender.com' }));
+// Allowed origins
+const allowedOrigins = [
+  'http://localhost:3001',
+  'http://localhost:3000', // Frontend during development
+  'https://frontend-8awn.onrender.com', // Deployed frontend
+];
 
-// Define a route
+// Configure CORS middleware
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true, // If you need to allow cookies or authentication headers
+  })
+);
+
+// Middleware for JSON parsing (if needed for POST/PUT requests)
+app.use(express.json());
+
+// Define a test route
 app.get('/', (req, res) => {
-    res.send('Hello, it is working!');
+  res.send('Hello, it is working!');
 });
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
