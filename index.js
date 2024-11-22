@@ -30,7 +30,7 @@ const PORT = 3000;
 
 // Enable CORS for all routes
 app.use(cors());
-app.use(cors({ origin: 'https://your-frontend-service.onrender.com' }));
+app.use(cors({ origin: 'https://backend-dpot.onrender.com' }));
 
 // Define a route
 app.get('/', (req, res) => {
